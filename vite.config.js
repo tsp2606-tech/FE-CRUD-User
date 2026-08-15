@@ -7,13 +7,16 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      "@": path.resolve(import.meta.dirname, "./src"),
     },
-  }, server: {
+  },
+  server: {
+    port: 3000,
     proxy: {
       "/api": {
-        target: "http://localhost:3001",
+        target: "https://crud-user-production.up.railway.app",
         changeOrigin: true,
+        secure: true,
       },
     },
   }

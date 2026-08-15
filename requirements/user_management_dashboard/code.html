@@ -1,0 +1,380 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Aether Management - Users</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Outfit:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#31394d",
+                        "on-primary-fixed-variant": "#004395",
+                        "on-secondary-container": "#c4abff",
+                        "on-primary-container": "#00285d",
+                        "on-error-container": "#ffdad6",
+                        "secondary": "#d0bcff",
+                        "on-tertiary": "#003640",
+                        "on-primary-fixed": "#001a42",
+                        "on-tertiary-fixed": "#001f26",
+                        "on-secondary-fixed": "#23005c",
+                        "primary-fixed": "#d8e2ff",
+                        "error": "#ffb4ab",
+                        "surface-container-high": "#222a3d",
+                        "tertiary-container": "#009eb9",
+                        "on-surface": "#dae2fd",
+                        "success-vibrant": "#10B981",
+                        "primary-fixed-dim": "#adc6ff",
+                        "danger-vibrant": "#EF4444",
+                        "outline": "#8c909f",
+                        "on-tertiary-container": "#002f38",
+                        "background": "#0b1326",
+                        "surface-container-highest": "#2d3449",
+                        "inverse-on-surface": "#283044",
+                        "surface-container": "#171f33",
+                        "secondary-fixed": "#e9ddff",
+                        "on-secondary": "#3c0091",
+                        "surface-container-low": "#131b2e",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "on-surface-variant": "#c2c6d6",
+                        "secondary-container": "#571bc1",
+                        "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                        "inverse-primary": "#005ac2",
+                        "error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#004e5c",
+                        "primary": "#adc6ff",
+                        "primary-container": "#4d8eff",
+                        "tertiary-fixed-dim": "#4cd7f6",
+                        "surface-tint": "#adc6ff",
+                        "surface-dim": "#0b1326",
+                        "glass-bg": "rgba(15, 23, 42, 0.65)",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "on-error": "#690005",
+                        "inverse-surface": "#dae2fd",
+                        "surface-container-lowest": "#060e20",
+                        "surface-variant": "#2d3449",
+                        "surface": "#0b1326",
+                        "tertiary-fixed": "#acedff",
+                        "outline-variant": "#424754",
+                        "on-background": "#dae2fd",
+                        "tertiary": "#4cd7f6",
+                        "on-primary": "#002e6a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "40px",
+                        "unit": "4px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "display-lg": ["Outfit"],
+                        "headline-lg-mobile": ["Outfit"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-sm": ["Outfit"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Outfit"],
+                        "headline-lg": ["Outfit"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+            overflow-x: hidden;
+        }
+        /* Radial Gradients for Level 0 Base */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -20%;
+            left: -10%;
+            width: 50%;
+            height: 50%;
+            background: radial-gradient(circle, rgba(77,142,255,0.08) 0%, rgba(11,19,38,0) 70%);
+            z-index: -1;
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -20%;
+            right: -10%;
+            width: 50%;
+            height: 50%;
+            background: radial-gradient(circle, rgba(208,188,255,0.08) 0%, rgba(11,19,38,0) 70%);
+            z-index: -1;
+        }
+        
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid theme('colors.glass-stroke');
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+            box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.2);
+        }
+
+        .table-row-hover:hover {
+            background: rgba(255, 255, 255, 0.03);
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
+        }
+        
+        /* Smooth scrolling */
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col md:flex-row font-body-md text-body-md bg-background text-on-surface">
+<!-- SideNavBar (Hidden on Mobile, Visible on Desktop) -->
+<nav class="hidden md:flex h-screen w-64 fixed left-0 top-0 z-50 bg-surface-container-low/60 backdrop-blur-xl border-r border-glass-stroke shadow-2xl flex-col py-8">
+<!-- Header -->
+<div class="px-6 mb-8 flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center shadow-[0_0_15px_rgba(77,142,255,0.3)]">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">admin_panel_settings</span>
+</div>
+<div>
+<h1 class="font-display-lg text-headline-sm text-on-surface">Aether Admin</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Enterprise Tier</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<div class="flex-1 overflow-y-auto w-full">
+<ul class="flex flex-col gap-2 w-full">
+
+<li class="">
+<a class="flex items-center gap-3 bg-primary/10 text-primary border-r-4 border-primary px-6 py-3 hover:bg-primary/5 hover:text-on-surface transition-all duration-300 hover:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="group" data-weight="fill" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-body-sm text-body-sm font-medium">Users</span>
+</a>
+</li>
+
+
+
+</ul>
+</div>
+<!-- Footer / CTA -->
+
+</nav>
+<!-- Main Content Wrapper (Adjusts for SideNav on Desktop) -->
+<div class="flex-1 flex flex-col md:ml-64 min-h-screen">
+<!-- TopNavBar (Visible on Mobile & Desktop) -->
+<header class="w-full sticky top-0 z-40 bg-glass-bg backdrop-blur-md border-b border-glass-stroke shadow-sm flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 w-full">
+<!-- Left Side: Mobile Menu Toggle & Search -->
+<div class="flex items-center gap-4">
+<button class="md:hidden text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full hover:bg-white/5 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="relative hidden sm:block group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">search</span>
+<input class="bg-surface-container/50 border border-glass-stroke rounded-full py-2 pl-10 pr-4 text-on-surface font-body-sm text-body-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/50 transition-all w-64 shadow-inner placeholder:text-outline-variant" placeholder="Search..." type="text">
+</div>
+</div>
+<!-- Center: Brand (Mobile Only) -->
+<div class="md:hidden flex-1 text-center">
+<span class="font-display-lg text-headline-md tracking-tight text-primary">Aether</span>
+</div>
+<!-- Right Side: Actions & Profile -->
+<div class="flex items-center gap-2 md:gap-4">
+<button class="text-on-surface-variant p-2 rounded-full hover:bg-white/5 hover:text-primary transition-colors duration-200 active:scale-95 transition-transform relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-danger-vibrant rounded-full shadow-[0_0_8px_rgba(239,68,68,0.6)]"></span>
+</button>
+<button class="text-on-surface-variant p-2 rounded-full hover:bg-white/5 hover:text-primary transition-colors duration-200 active:scale-95 transition-transform hidden sm:block">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-px bg-glass-stroke mx-2 hidden sm:block"></div>
+<button class="w-9 h-9 rounded-full overflow-hidden border border-glass-stroke hover:border-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50">
+<img alt="Administrator profile" class="w-full h-full object-cover" data-alt="A close-up portrait of a professional administrator in a high-tech server room environment. The lighting is moody with cool blue and purple neon accents reflecting softly on their face. They look focused and competent. The overall aesthetic is sleek, corporate, and futuristic, aligning with a premium dark-mode dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAyvHWwGBZ9uvyirPRYOszobhwKgAvhyTJBhK-IJ-zn5hX10llLCZ0FKopOok5yHOH1hrLfEPC5zSTyj2SXXsy4oS1BATVeYHeuPWKBGANm9FH04JLovzKudfPahW57kVtuaDr0keFuB1z-zkLwwE35_He_ICpEiOmK2NJ1Z0xRSpjN9P2ee5BJqJWpmb9dhBTrUCzx3Ru7vPJufwWAbW2-QeH8CffhRcIzxTneeqmCUcSWhFlK-w1_w">
+</button>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 p-margin-mobile md:p-margin-desktop w-full max-w-container-max mx-auto flex flex-col gap-8">
+<!-- Page Header -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+<div>
+<h2 class="font-display-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Users</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Manage platform access and user roles.</p>
+</div>
+<button class="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-gradient-to-r from-primary-container to-secondary-container text-white font-label-md text-label-md shadow-[0_4px_12px_rgba(77,142,255,0.2)] hover:shadow-[0_4px_20px_rgba(77,142,255,0.4)] transition-all duration-300 hover:-translate-y-0.5 active:scale-95 group">
+<span class="material-symbols-outlined text-[18px] group-hover:rotate-90 transition-transform duration-300">add</span>
+                    Add User
+                </button>
+</div>
+<!-- Content Area: Glassmorphism Data Table -->
+<div class="glass-panel rounded-xl overflow-hidden flex flex-col">
+<!-- Table Controls / Filters (Optional Context) -->
+<div class="p-4 border-b border-glass-stroke flex justify-between items-center bg-surface-container-low/30">
+<div class="flex gap-2">
+<button class="px-3 py-1.5 rounded-md bg-surface-container border border-glass-stroke text-on-surface-variant font-label-sm text-label-sm hover:text-on-surface hover:border-outline-variant transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">filter_list</span>
+                            Filter
+                        </button>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Showing 5 of 142 users</span>
+</div>
+<!-- The Table -->
+<div class="overflow-x-auto w-full">
+<table class="w-full text-left border-collapse min-w-[600px]">
+<thead>
+<tr class="border-b border-glass-stroke bg-surface-container/20">
+<th class="p-4 font-label-md text-label-md text-outline font-medium tracking-wider w-1/3">User</th>
+<th class="p-4 font-label-md text-label-md text-outline font-medium tracking-wider">Email Address</th>
+<th class="p-4 font-label-md text-label-md text-outline font-medium tracking-wider">Role</th>
+<th class="p-4 font-label-md text-label-md text-outline font-medium tracking-wider">Date Added</th>
+<th class="p-4 font-label-md text-label-md text-outline font-medium tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm text-on-surface-variant">
+<!-- Row 1 -->
+<tr class="border-b border-glass-stroke/50 table-row-hover transition-colors duration-200">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-primary/30">
+<img alt="Sarah Jenkins" class="w-full h-full object-cover" data-alt="A headshot of a smiling professional woman with short dark hair, wearing a navy blazer, against a clean dark grey background. Soft studio lighting. High-quality corporate portrait suitable for a dashboard avatar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4rgtoR-2BDxEbTO4aXljUI4PBbZyk1PwG-QQFNVD-y0PfqE080mgRDgjDr5HHBeeQxCxeg8vXhH26-d_HzmdZUwk4-XqaBuPtKqyjicES7JPH65ujVHVqCH9MZD3RrfxrZRXn_niGwNHmO4xxnHOcj6-GS6g7lG8f6i1IhvZA7L5vmk0anhuK1CFiL7978ExuM2uptAVdRflIn9e8UHLHqm2v3b4QJJsa9njO1WtPhu5IWVyFdEyQ3Q">
+</div>
+
+</div>
+<div>
+<div class="text-on-surface font-medium">Sarah Jenkins</div>
+<div class="text-[12px] text-on-surface-variant/70">Engineering</div>
+</div>
+</div>
+</td>
+<td class="p-4">sarah.j@aether.io</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 text-[11px] font-medium tracking-wide">Admin</span>
+</td>
+<td class="p-4 text-on-surface-variant/70">Oct 24, 2023</td>
+<td class="p-4 text-right">
+<div class="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity" style="opacity: 1;"><button class="p-1.5 rounded-md text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors" title="More Information"><span class="material-symbols-outlined text-[18px]">info</span></button> <!-- Forced opacity for demo -->
+<button class="p-1.5 rounded-md text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors" title="Edit">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded-md text-on-surface-variant hover:text-danger-vibrant hover:bg-danger-vibrant/10 transition-colors" title="Delete">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="border-b border-glass-stroke/50 table-row-hover transition-colors duration-200">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-glass-stroke flex items-center justify-center bg-surface-container-high text-on-surface font-medium">
+                                                MC
+                                            </div>
+</div>
+<div>
+<div class="text-on-surface font-medium">Marcus Chen</div>
+<div class="text-[12px] text-on-surface-variant/70">Design</div>
+</div>
+</div>
+</td>
+<td class="p-4">marcus.c@aether.io</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-surface-container-high text-on-surface-variant border border-glass-stroke text-[11px] font-medium tracking-wide">Editor</span>
+</td>
+<td class="p-4 text-on-surface-variant/70">Nov 12, 2023</td>
+<td class="p-4 text-right">
+<div class="flex items-center justify-end gap-1"><button class="p-1.5 rounded-md text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors" title="More Information"><span class="material-symbols-outlined text-[18px]">info</span></button>
+<button class="p-1.5 rounded-md text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded-md text-on-surface-variant hover:text-danger-vibrant hover:bg-danger-vibrant/10 transition-colors">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="border-b border-glass-stroke/50 table-row-hover transition-colors duration-200">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-glass-stroke">
+<img alt="David Miller" class="w-full h-full object-cover" data-alt="A portrait of a young male professional wearing clear framed glasses and a casual grey sweater. The background is a blurred office setting with cool, subtle lighting. Modern, clean aesthetic suitable for a high-end UI avatar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYelijLz4mDBD7eqeoz4_7DLoEZygHoRSIloaSbYkWwZ6azCguaJbGv7YoC7JiCDgKZ_j0sYvUj5a_-0iTff1rcGc1rWo3B71-AjxruEgRydfCz5tqCN6mo_HRcrsF9cpvYcCNCoYHElUDXyFri1Bx-2nI7_tpEGeDSSdtvcSDMk4yKFjbvY_YeTklpbiPxNMM91D8pCPV99XDtghUtIR3g1S_UOcMu5IaetgMLINEgv9Dwi2piFBCUQ">
+</div>
+</div>
+<div>
+<div class="text-on-surface font-medium">David Miller</div>
+<div class="text-[12px] text-on-surface-variant/70">Marketing</div>
+</div>
+</div>
+</td>
+<td class="p-4">david.m@aether.io</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-surface-container-high text-on-surface-variant border border-glass-stroke text-[11px] font-medium tracking-wide">Viewer</span>
+</td>
+<td class="p-4 text-on-surface-variant/70">Jan 05, 2024</td>
+<td class="p-4 text-right">
+<div class="flex items-center justify-end gap-1"><button class="p-1.5 rounded-md text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors" title="More Information"><span class="material-symbols-outlined text-[18px]">info</span></button>
+<button class="p-1.5 rounded-md text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded-md text-on-surface-variant hover:text-danger-vibrant hover:bg-danger-vibrant/10 transition-colors">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="p-4 border-t border-glass-stroke bg-surface-container-lowest/50 flex justify-between items-center">
+<button class="px-3 py-1.5 text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm disabled:opacity-50 flex items-center gap-1 transition-colors" disabled="">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+                        Prev
+                    </button>
+<div class="flex gap-1">
+<button class="w-8 h-8 rounded bg-primary/20 text-primary font-label-sm flex items-center justify-center border border-primary/30">1</button>
+<button class="w-8 h-8 rounded hover:bg-white/5 text-on-surface-variant font-label-sm flex items-center justify-center transition-colors">2</button>
+<button class="w-8 h-8 rounded hover:bg-white/5 text-on-surface-variant font-label-sm flex items-center justify-center transition-colors">3</button>
+</div>
+<button class="px-3 py-1.5 text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm flex items-center gap-1 transition-colors">
+                        Next
+                        <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+</main>
+</div>
+
+
+
+
+</body></html>

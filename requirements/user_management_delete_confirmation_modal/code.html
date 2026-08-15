@@ -1,0 +1,162 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Delete User Confirmation Modal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Outfit:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#2d3449",
+                        "surface-container-lowest": "#060e20",
+                        "on-surface-variant": "#c2c6d6",
+                        "on-background": "#dae2fd",
+                        "on-tertiary": "#003640",
+                        "primary": "#adc6ff",
+                        "glass-bg": "rgba(15, 23, 42, 0.65)",
+                        "on-secondary": "#3c0091",
+                        "on-secondary-container": "#c4abff",
+                        "on-error": "#690005",
+                        "inverse-surface": "#dae2fd",
+                        "surface-container-high": "#222a3d",
+                        "on-error-container": "#ffdad6",
+                        "background": "#0b1326",
+                        "on-secondary-fixed": "#23005c",
+                        "primary-fixed-dim": "#adc6ff",
+                        "error-container": "#93000a",
+                        "outline-variant": "#424754",
+                        "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                        "surface": "#0b1326",
+                        "on-surface": "#dae2fd",
+                        "on-primary-container": "#00285d",
+                        "tertiary-fixed-dim": "#4cd7f6",
+                        "secondary": "#d0bcff",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "on-primary-fixed-variant": "#004395",
+                        "inverse-on-surface": "#283044",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "outline": "#8c909f",
+                        "on-primary": "#002e6a",
+                        "surface-dim": "#0b1326",
+                        "success-vibrant": "#10B981",
+                        "surface-bright": "#31394d",
+                        "secondary-fixed": "#e9ddff",
+                        "surface-container-low": "#131b2e",
+                        "on-tertiary-container": "#002f38",
+                        "surface-container": "#171f33",
+                        "on-primary-fixed": "#001a42",
+                        "surface-tint": "#adc6ff",
+                        "primary-container": "#4d8eff",
+                        "danger-vibrant": "#EF4444",
+                        "on-tertiary-fixed-variant": "#004e5c",
+                        "error": "#ffb4ab",
+                        "primary-fixed": "#d8e2ff",
+                        "inverse-primary": "#005ac2",
+                        "tertiary-fixed": "#acedff",
+                        "surface-variant": "#2d3449",
+                        "tertiary-container": "#009eb9",
+                        "on-tertiary-fixed": "#001f26",
+                        "secondary-container": "#571bc1",
+                        "tertiary": "#4cd7f6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "40px",
+                        "container-max": "1280px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Outfit"],
+                        "headline-sm": ["Outfit"],
+                        "label-md": ["Inter"],
+                        "display-lg": ["Outfit"],
+                        "headline-lg": ["Outfit"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Outfit"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-modal {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(173, 198, 255, 0.05);
+        }
+        .bg-gradient-radial {
+            background-image: radial-gradient(circle at center, var(--tw-gradient-stops));
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface h-screen w-screen overflow-hidden antialiased flex selection:bg-primary selection:text-on-primary">
+<!-- Mock Background Dashboard Overlay -->
+<div class="fixed inset-0 z-0">
+<iframe class="w-full h-full border-none pointer-events-none opacity-50 blur-sm saturate-50" src="{{DATA:SCREEN:SCREEN_3}}" title="Background Dashboard"></iframe>
+<!-- Overlay tint to ensure modal pops -->
+<div class="absolute inset-0 bg-background/60"></div>
+</div>
+<!-- Modal Container -->
+<div class="relative z-50 flex items-center justify-center min-h-screen w-full px-margin-mobile md:px-margin-desktop p-4">
+<!-- Backdrop Blur for Depth (Level 2) -->
+<div aria-hidden="true" class="fixed inset-0 backdrop-blur-[8px] bg-background/40 transition-opacity"></div>
+<!-- Modal Content -->
+<div class="glass-modal rounded-xl w-full max-w-md transform overflow-hidden p-8 text-left align-middle shadow-2xl transition-all scale-100 relative">
+<!-- Subtle Glow behind the icon -->
+<div class="absolute top-0 left-0 w-full h-32 bg-gradient-radial from-danger-vibrant/10 to-transparent opacity-50 pointer-events-none"></div>
+<div class="relative z-10 flex flex-col items-center text-center">
+<!-- Icon Container -->
+<div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-error-container/20 border border-error-container/50 mb-6 relative">
+<div class="absolute inset-0 rounded-full bg-danger-vibrant/20 blur-md"></div>
+<span class="material-symbols-outlined text-error text-3xl z-10" data-icon="delete_forever" data-weight="fill" style="font-variation-settings: 'FILL' 1;">delete_forever</span>
+</div>
+<!-- Text Content -->
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2" id="modal-title">Delete User</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 px-4">
+                    Are you sure you want to delete this user? This action cannot be undone and will permanently remove all associated data.
+                </p>
+<!-- Actions -->
+<div class="flex flex-col sm:flex-row w-full gap-4 justify-center">
+<button class="inline-flex w-full justify-center rounded-lg bg-white/5 px-6 py-3 font-label-md text-label-md text-on-surface hover:bg-white/10 border border-glass-stroke transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:w-auto" type="button">
+                        Cancel
+                    </button>
+<button class="inline-flex w-full justify-center rounded-lg bg-danger-vibrant/90 px-6 py-3 font-label-md text-label-md text-white shadow-[0_0_15px_rgba(239,68,68,0.4)] hover:bg-danger-vibrant hover:shadow-[0_0_25px_rgba(239,68,68,0.6)] border border-danger-vibrant/50 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-danger-vibrant focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:w-auto" type="button">
+                        Delete User
+                    </button>
+</div>
+</div>
+</div>
+</div>
+</body></html>

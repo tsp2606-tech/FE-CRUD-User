@@ -1,0 +1,216 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Edit User - Aether Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "glass-stroke": "rgba(255, 255, 255, 0.1)",
+                        "secondary-container": "#571bc1",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "surface-bright": "#31394d",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "on-background": "#dae2fd",
+                        "tertiary-container": "#009eb9",
+                        "surface-container-lowest": "#060e20",
+                        "surface-container-low": "#131b2e",
+                        "inverse-on-surface": "#283044",
+                        "surface-container-high": "#222a3d",
+                        "primary-fixed": "#d8e2ff",
+                        "background": "#0b1326",
+                        "secondary": "#d0bcff",
+                        "surface-container-highest": "#2d3449",
+                        "error": "#ffb4ab",
+                        "inverse-primary": "#005ac2",
+                        "surface-container": "#171f33",
+                        "surface": "#0b1326",
+                        "on-error": "#690005",
+                        "on-primary-container": "#00285d",
+                        "primary": "#adc6ff",
+                        "surface-variant": "#2d3449",
+                        "on-surface-variant": "#c2c6d6",
+                        "secondary-fixed": "#e9ddff",
+                        "on-surface": "#dae2fd",
+                        "on-primary": "#002e6a",
+                        "on-tertiary-container": "#002f38",
+                        "on-secondary": "#3c0091",
+                        "on-primary-fixed-variant": "#004395",
+                        "surface-tint": "#adc6ff",
+                        "tertiary": "#4cd7f6",
+                        "glass-bg": "rgba(15, 23, 42, 0.65)",
+                        "on-tertiary-fixed-variant": "#004e5c",
+                        "danger-vibrant": "#EF4444",
+                        "tertiary-fixed": "#acedff",
+                        "on-primary-fixed": "#001a42",
+                        "on-tertiary-fixed": "#001f26",
+                        "inverse-surface": "#dae2fd",
+                        "surface-dim": "#0b1326",
+                        "primary-container": "#4d8eff",
+                        "on-secondary-container": "#c4abff",
+                        "on-tertiary": "#003640",
+                        "success-vibrant": "#10B981",
+                        "on-error-container": "#ffdad6",
+                        "outline-variant": "#424754",
+                        "outline": "#8c909f",
+                        "error-container": "#93000a",
+                        "tertiary-fixed-dim": "#4cd7f6",
+                        "primary-fixed-dim": "#adc6ff",
+                        "on-secondary-fixed": "#23005c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "margin-desktop": "40px",
+                        "container-max": "1280px",
+                        "gutter": "24px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Outfit"],
+                        "headline-md": ["Outfit"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-sm": ["Outfit"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Outfit"],
+                        "display-lg": ["Outfit"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(19, 27, 46, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glass-modal {
+            background: rgba(19, 27, 46, 0.8);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px rgba(173, 198, 255, 0.1);
+        }
+
+        .input-glass {
+            background: rgba(11, 19, 38, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .input-glass:focus {
+            border-color: #adc6ff;
+            box-shadow: 0 0 10px rgba(173, 198, 255, 0.2);
+            outline: none;
+        }
+
+        .btn-primary-gradient {
+            background: linear-gradient(135deg, #adc6ff 0%, #d0bcff 100%);
+            color: #00285d;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary-gradient:hover {
+            box-shadow: 0 0 15px rgba(208, 188, 255, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .modal-enter {
+            animation: modalScaleIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes modalScaleIn {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen overflow-hidden font-body-md">
+<!-- Background Dashboard Context (Blurred out) -->
+<div class="fixed inset-0 z-0">
+<iframe class="w-full h-full opacity-40 blur-sm pointer-events-none border-none" src="{{DATA:SCREEN:SCREEN_5}}"></iframe>
+</div>
+<!-- Modal Backdrop -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-margin-desktop bg-surface-container-lowest/60 backdrop-blur-md">
+<!-- Modal Container -->
+<div class="glass-modal w-full max-w-md rounded-xl p-8 relative modal-enter flex flex-col gap-6">
+<!-- Header -->
+<div class="flex justify-between items-start">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface tracking-tight mb-1">Edit User</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Update credentials and personal details.</p>
+</div>
+<button aria-label="Close modal" class="text-on-surface-variant hover:text-on-surface transition-colors p-1 rounded-full hover:bg-white/5">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<!-- Form -->
+<form class="flex flex-col gap-5">
+<!-- Full Name Field -->
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider" for="fullName">Full Name</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="person">person</span>
+<input class="input-glass w-full rounded-lg py-2.5 pl-10 pr-4 font-body-md text-body-md text-on-surface placeholder-outline-variant bg-surface-bright" id="fullName" name="fullName" placeholder="Enter full name" type="text" value="Sarah Jenkins">
+</div>
+</div>
+<!-- Email Field -->
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider" for="email">Email Address</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="mail">mail</span>
+<input class="input-glass w-full rounded-lg py-2.5 pl-10 pr-4 font-body-md text-body-md text-on-surface placeholder-outline-variant bg-surface-bright" id="email" name="email" placeholder="Enter email address" type="email" value="sarah.j@aether.io">
+</div>
+</div>
+<!-- Age Field -->
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider" for="age">Age</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="calendar_today">calendar_today</span>
+<input class="input-glass w-full rounded-lg py-2.5 pl-10 pr-4 font-body-md text-body-md text-on-surface placeholder-outline-variant bg-surface-bright" id="age" name="age" placeholder="Enter age" type="number" value="28">
+</div>
+</div>
+<!-- Actions -->
+<div class="flex justify-end gap-3 mt-4 pt-4 border-t border-glass-stroke">
+<button class="px-5 py-2.5 rounded-lg font-label-md text-label-md text-on-surface-variant bg-white/5 hover:bg-white/10 border border-glass-stroke transition-all duration-200" type="button">
+                        Cancel
+                    </button>
+<button class="btn-primary-gradient px-6 py-2.5 rounded-lg font-label-md text-label-md font-bold shadow-lg" type="submit">
+                        Save Changes
+                    </button>
+</div>
+</form>
+</div>
+</div>
+
+
+</body></html>

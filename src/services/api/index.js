@@ -1,31 +1,56 @@
-import axios from 'axios';
+const baseURL = import.meta.env.VITE_API_URL || "/api";
 
-const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || '/api',
-  timeout: 10000,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+const buildURL = (path) => `${baseURL}${path}`;
 
-// Thêm interceptors nếu cần (ví dụ: đính kèm token vào header)
-axiosInstance.interceptors.request.use(
-  (config) => {
-    // config.headers.Authorization = `Bearer ${token}`;
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
+const parseResponse = async (response) => {
+  const contentType = response.headers.get("content-type") ?? "";
+
+  if (!contentType.includes("application/json")) {
+    return null;
   }
-);
 
-axiosInstance.interceptors.response.use(
-  (response) => {
-    return response.data;
-  },
-  (error) => {
-    return Promise.reject(error);
+  return response.json();
+};
+
+const request = async (path, options = {}) => {
+  const response = await fetch(buildURL(path), {
+    headers: {
+      "Content-Type": "application/json",
+      ...options.headers,
+    },
+    ...options,
+  });
+
+  const data = await parseResponse(response);
+
+  if (!response.ok) {
+    const error = new Error(data?.error || data?.message || "Request failed");
+    error.response = {
+      data,
+      status: response.status,
+    };
+    throw error;
   }
-);
+
+  return data;
+};
+
+const axiosInstance = {
+  get: (path) => request(path),
+  post: (path, data) =>
+    request(path, {
+      body: JSON.stringify(data),
+      method: "POST",
+    }),
+  put: (path, data) =>
+    request(path, {
+      body: JSON.stringify(data),
+      method: "PUT",
+    }),
+  delete: (path) =>
+    request(path, {
+      method: "DELETE",
+    }),
+};
 
 export default axiosInstance;
