@@ -7,10 +7,10 @@ function htmlToJsx(html) {
     .replace(/for=/g, 'htmlFor=')
     .replace(/<!--[\s\S]*?-->/g, '')
     // Fix self closing tags
-    .replace(/<img([^>]*[^\/])>/g, '<img$1 />')
-    .replace(/<input([^>]*[^\/])>/g, '<input$1 />')
-    .replace(/<br([^>]*[^\/])>/g, '<br$1 />')
-    .replace(/<hr([^>]*[^\/])>/g, '<hr$1 />')
+    .replace(/<img([^>]*[^/])>/g, '<img$1 />')
+    .replace(/<input([^>]*[^/])>/g, '<input$1 />')
+    .replace(/<br([^>]*[^/])>/g, '<br$1 />')
+    .replace(/<hr([^>]*[^/])>/g, '<hr$1 />')
     // Fix onsubmit
     .replace(/onsubmit="[^"]*"/g, 'onSubmit={(e) => e.preventDefault()}')
     // Remove dummy background image in modals
