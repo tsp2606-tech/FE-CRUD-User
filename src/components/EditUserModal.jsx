@@ -36,9 +36,12 @@ const EditUserModal = ({ error, isSubmitting, onClose, onSubmit, open, user }) =
 
     const oldName = (user?.name ?? "").trim();
     const oldEmail = (user?.email ?? "").trim();
-    const oldAge = user?.age == null ? undefined : Number(user.age);
+    
+    // Compare string versions exactly as initialized
+    const currentAgeStr = form.age.trim();
+    const initialAgeStr = user?.age == null ? "" : String(user.age).trim();
 
-    if (newName === oldName && newEmail === oldEmail && newAge === oldAge) {
+    if (newName === oldName && newEmail === oldEmail && currentAgeStr === initialAgeStr) {
       alert("Không có gì thay đổi cả");
       onClose();
       return;
