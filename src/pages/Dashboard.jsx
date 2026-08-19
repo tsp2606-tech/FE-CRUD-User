@@ -76,6 +76,14 @@ const Dashboard = () => {
   const [query, setQuery] = useState("");
   const [selectedUser, setSelectedUser] = useState(null);
   const [users, setUsers] = useState([]);
+  const [toast, setToast] = useState({ message: "", visible: false });
+
+  const showToast = (message) => {
+    setToast({ message, visible: true });
+    setTimeout(() => {
+      setToast((prev) => ({ ...prev, visible: false }));
+    }, 3000);
+  };
 
   const filteredUsers = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -168,7 +176,13 @@ const Dashboard = () => {
       setSelectedUser((currentUser) => normalizeUser({ ...currentUser, ...response }));
       closeModal();
     } catch (requestError) {
-      setModalError(getErrorMessage(requestError, "Unable to update user."));
+      if (requestError?.response?.status === 404) {
+        showToast("Người dùng không tồn tại (có thể đã bị xoá)");
+        closeModal();
+        loadUsers();
+      } else {
+        setModalError(getErrorMessage(requestError, "Unable to update user."));
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -185,7 +199,13 @@ const Dashboard = () => {
       setUsers((currentUsers) => currentUsers.filter((user) => user._id !== id));
       closeModal();
     } catch (requestError) {
-      setModalError(getErrorMessage(requestError, "Unable to delete user."));
+      if (requestError?.response?.status === 404) {
+        showToast("Người dùng không tồn tại (có thể đã bị xoá)");
+        closeModal();
+        loadUsers();
+      } else {
+        setModalError(getErrorMessage(requestError, "Unable to delete user."));
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -508,6 +528,19 @@ const Dashboard = () => {
         open={activeModal === "details"}
         user={selectedUser}
       />
+      {/* Toast Notification */}
+      <div
+        className={`fixed bottom-6 right-6 z-[100] flex items-center gap-3 rounded-lg border border-danger-vibrant/25 bg-surface-container-high px-4 py-3 shadow-[0_8px_30px_rgba(239,68,68,0.2)] transition-all duration-300 pointer-events-none ${
+          toast.visible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+        }`}
+      >
+        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-danger-vibrant/10 text-danger-vibrant">
+          <Info className="h-5 w-5" />
+        </div>
+        <p className="font-body-sm text-body-sm font-medium text-on-surface">
+          {toast.message}
+        </p>
+      </div>
     </div>
   );
 };

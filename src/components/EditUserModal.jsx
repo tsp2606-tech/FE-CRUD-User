@@ -29,10 +29,24 @@ const EditUserModal = ({ error, isSubmitting, onClose, onSubmit, open, user }) =
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    const newName = form.name.trim();
+    const newEmail = form.email.trim();
+    const newAge = form.age === "" ? undefined : Number(form.age);
+
+    const oldName = (user?.name ?? "").trim();
+    const oldEmail = (user?.email ?? "").trim();
+    const oldAge = user?.age == null ? undefined : Number(user.age);
+
+    if (newName === oldName && newEmail === oldEmail && newAge === oldAge) {
+      onClose();
+      return;
+    }
+
     onSubmit(user?._id, {
-      name: form.name.trim(),
-      email: form.email.trim(),
-      age: form.age === "" ? undefined : Number(form.age),
+      name: newName,
+      email: newEmail,
+      age: newAge,
     });
   };
 
