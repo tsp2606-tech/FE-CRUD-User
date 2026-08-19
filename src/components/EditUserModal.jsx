@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CalendarDays, Mail, User, X } from "lucide-react";
+import { CalendarDays, Info, Mail, User, X } from "lucide-react";
 
 const EditUserModal = ({ error, isSubmitting, onClose, onSubmit, open, user }) => {
   const [form, setForm] = useState({
@@ -7,6 +7,7 @@ const EditUserModal = ({ error, isSubmitting, onClose, onSubmit, open, user }) =
     email: "",
     age: "",
   });
+  const [localError, setLocalError] = useState("");
 
   useEffect(() => {
     if (!user) return;
@@ -42,10 +43,11 @@ const EditUserModal = ({ error, isSubmitting, onClose, onSubmit, open, user }) =
     const initialAgeStr = user?.age == null ? "" : String(user.age).trim();
 
     if (newName === oldName && newEmail === oldEmail && currentAgeStr === initialAgeStr) {
-      alert("Không có gì thay đổi cả");
-      onClose();
+      setLocalError("Không có gì thay đổi cả. Vui lòng chỉnh sửa hoặc bấm Cancel.");
       return;
     }
+
+    setLocalError("");
 
     onSubmit(user?._id, {
       name: newName,
@@ -133,6 +135,13 @@ const EditUserModal = ({ error, isSubmitting, onClose, onSubmit, open, user }) =
               />
             </span>
           </label>
+
+          {localError && (
+            <div className="flex items-center gap-2 rounded-lg border border-amber-500/30 bg-amber-500/10 px-4 py-3 font-body-sm text-body-sm text-amber-500">
+              <Info className="h-4 w-4" />
+              {localError}
+            </div>
+          )}
 
           {error && (
             <p className="rounded-lg border border-danger-vibrant/25 bg-danger-vibrant/10 px-4 py-3 font-body-sm text-body-sm text-error">
