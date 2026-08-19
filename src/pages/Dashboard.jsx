@@ -77,6 +77,8 @@ const Dashboard = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [users, setUsers] = useState([]);
   const [toast, setToast] = useState({ message: "", visible: false });
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 10;
 
   const showToast = (message) => {
     setToast({ message, visible: true });
@@ -96,6 +98,16 @@ const Dashboard = () => {
         .some((value) => value.toLowerCase().includes(normalizedQuery))
     );
   }, [query, users]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [query]);
+
+  const totalPages = Math.ceil(filteredUsers.length / ITEMS_PER_PAGE);
+  const paginatedUsers = filteredUsers.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
 
   const loadUsers = async () => {
     setIsLoading(true);
@@ -284,14 +296,6 @@ const Dashboard = () => {
             >
               <Settings className="h-5 w-5" />
             </button>
-            <div className="hidden h-8 w-px bg-glass-stroke sm:block" />
-            <button
-              aria-label="Administrator profile"
-              className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border border-glass-stroke bg-surface-container-high text-sm font-semibold text-on-surface transition-colors hover:border-primary"
-              type="button"
-            >
-              LA
-            </button>
           </div>
         </header>
 
@@ -372,7 +376,7 @@ const Dashboard = () => {
                     </tr>
                   )}
 
-                  {!isLoading && filteredUsers.length === 0 && (
+                  {!isLoading && paginatedUsers.length === 0 && (
                     <tr>
                       <td
                         className="p-8 text-center font-body-md text-body-md text-on-surface-variant"
@@ -383,7 +387,7 @@ const Dashboard = () => {
                     </tr>
                   )}
 
-                  {!isLoading && filteredUsers.map((user) => (
+                  {!isLoading && paginatedUsers.map((user) => (
                     <tr
                       className="table-row-hover border-b border-glass-stroke/50 transition-colors"
                       key={user._id}
@@ -461,38 +465,55 @@ const Dashboard = () => {
               </table>
             </div>
 
-            <footer className="flex items-center justify-between border-t border-glass-stroke bg-surface-container-lowest/50 p-4">
-              <button
-                className="inline-flex items-center gap-1 rounded-lg px-3 py-1.5 font-label-sm text-label-sm text-on-surface-variant opacity-50"
-                disabled
-                type="button"
-              >
-                <ChevronLeft className="h-4 w-4" />
-                Prev
-              </button>
-              <div className="flex gap-1">
-                {[1, 2, 3].map((page) => (
-                  <button
-                    className={`flex h-8 w-8 items-center justify-center rounded-lg border font-label-sm text-label-sm transition-colors ${
-                      page === 1
-                        ? "border-primary/30 bg-primary/20 text-primary"
-                        : "border-transparent text-on-surface-variant hover:bg-white/5"
-                    }`}
-                    key={page}
-                    type="button"
-                  >
-                    {page}
-                  </button>
-                ))}
-              </div>
-              <button
-                className="inline-flex items-center gap-1 rounded-lg px-3 py-1.5 font-label-sm text-label-sm text-on-surface-variant transition-colors hover:text-on-surface"
-                type="button"
-              >
-                Next
-                <ChevronRight className="h-4 w-4" />
-              </button>
-            </footer>
+            {totalPages > 1 && (
+              <footer className="flex items-center justify-between border-t border-glass-stroke bg-surface-container-lowest/50 p-4">
+                <button
+                  className={`inline-flex items-center gap-1 rounded-lg px-3 py-1.5 font-label-sm text-label-sm transition-colors ${
+                    currentPage === 1
+                      ? "text-on-surface-variant opacity-50 cursor-not-allowed"
+                      : "text-on-surface-variant hover:text-on-surface"
+                  }`}
+                  disabled={currentPage === 1}
+                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                  type="button"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                  Prev
+                </button>
+                <div className="flex gap-1">
+                  {[...Array(totalPages)].map((_, i) => {
+                    const page = i + 1;
+                    return (
+                      <button
+                        className={`flex h-8 w-8 items-center justify-center rounded-lg border font-label-sm text-label-sm transition-colors ${
+                          page === currentPage
+                            ? "border-primary/30 bg-primary/20 text-primary"
+                            : "border-transparent text-on-surface-variant hover:bg-white/5"
+                        }`}
+                        key={page}
+                        onClick={() => setCurrentPage(page)}
+                        type="button"
+                      >
+                        {page}
+                      </button>
+                    );
+                  })}
+                </div>
+                <button
+                  className={`inline-flex items-center gap-1 rounded-lg px-3 py-1.5 font-label-sm text-label-sm transition-colors ${
+                    currentPage === totalPages
+                      ? "text-on-surface-variant opacity-50 cursor-not-allowed"
+                      : "text-on-surface-variant hover:text-on-surface"
+                  }`}
+                  disabled={currentPage === totalPages}
+                  onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                  type="button"
+                >
+                  Next
+                  <ChevronRight className="h-4 w-4" />
+                </button>
+              </footer>
+            )}
           </section>
         </main>
       </div>
