@@ -39,6 +39,7 @@ const EditUserModal = ({ error, isSubmitting, onClose, onSubmit, open, user }) =
     const oldAge = user?.age == null ? undefined : Number(user.age);
 
     if (newName === oldName && newEmail === oldEmail && newAge === oldAge) {
+      alert("Không có gì thay đổi cả");
       onClose();
       return;
     }
